@@ -5,15 +5,18 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../components/Context/AuthProvider/AuthProvider';
 
 const Login = () => {
-    const { userLogin } = useContext(AuthContext)
+    const { userLogin, setUser } = useContext(AuthContext)
     const [singinError, setSigninError] = useState('')
+    const [userRole, setUserRole] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm()
     const handleLogin = (data) => {
-        console.log(data)
+        //console.log(data)
+        setSigninError('')
         userLogin(data.email, data.password)
             .then(res => {
                 const user = res.user;
                 toast.success('Login successful')
+                handleUserRole(user)
             })
             .catch(err => {
                 console.log(err)
@@ -21,7 +24,26 @@ const Login = () => {
             })
     }
     const handleUser = event => {
-        console.log(event.target.value)
+        setUserRole(event.target.value)
+    }
+    const handleUserRole = (user) => {
+        // console.log(user)
+        fetch('http://localhost:5000/users')
+            .then(res => res.json())
+            .then(data => {
+                //console.log(data)
+                const savedUser = data.find(sData => sData.email === user.email)
+                /// console.log(savedUser)
+                if (savedUser.role === 'admin' && userRole === 'admin') {
+                    setUser({ ...user, role: 'admin' })
+                }
+                else if (savedUser.role === 'seller' && userRole === 'seller') {
+                    setUser({ ...user, role: 'seller' })
+                }
+                else {
+                    setUser(user)
+                }
+            })
     }
     return (
         <div className='bg-base-200'>

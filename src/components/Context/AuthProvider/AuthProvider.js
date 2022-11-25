@@ -26,13 +26,14 @@ const AuthProvider = ({ children }) => {
         const unsubcribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
             setLoading(false)
-            console.log(currentUser)
+            // console.log(currentUser)
         })
         return () => unsubcribe();
     }, [])
     const authInfo = {
         user,
         loading,
+        setUser,
         userLogin,
         registration,
         updateUserProfile,

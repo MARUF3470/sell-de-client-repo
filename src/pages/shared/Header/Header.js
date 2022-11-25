@@ -4,6 +4,7 @@ import { AuthContext } from '../../../components/Context/AuthProvider/AuthProvid
 
 const Header = () => {
     const { logOut, user } = useContext(AuthContext)
+    console.log(user)
     const handleLogout = () => {
         logOut()
             .then(res => { })
@@ -15,6 +16,19 @@ const Header = () => {
             !user?.email && <><li><Link className='btn btn-ghost' to='/login'>Login</Link></li>
                 <li><Link className='btn btn-ghost' to='/register'>Register</Link></li></>
         }
+        {
+            user?.role === 'admin' &&
+            <>
+                <li><Link className='btn btn-ghost' to='/allUsers'>All Users</Link></li>
+            </>
+        }
+        {
+            user?.role === 'seller' &&
+            <>
+                <li><Link className='btn btn-ghost' to='/addCar'>Add Car</Link></li>
+            </>
+        }
+
     </>
     return (
         <div>
