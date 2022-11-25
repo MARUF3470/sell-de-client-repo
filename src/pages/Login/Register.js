@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ import './register.css'
 const Register = () => {
     const { registration, updateUserProfile } = useContext(AuthContext)
     const [registrationError, setRegistrationError] = useState('')
-    const [photo, setPhoto] = useState(null)
+    let photo;
     const { register, handleSubmit, formState: { errors } } = useForm()
     const imageApiKey = process.env.REACT_APP_imgkey;
     console.log(imageApiKey)
@@ -26,10 +26,11 @@ const Register = () => {
             .then(res => res.json())
             .then(imgData => {
                 if (imgData.success) {
-                    console.log(imgData.data.url)
-                    setPhoto(imgData.data.url)
+                    // console.log(imgData.data.url)
+                    photo = imgData.data.url
                 }
             })
+        console.log(photo)
         registration(data.email, data.password)
             .then(res => {
                 const user = res.user;
@@ -40,6 +41,7 @@ const Register = () => {
                     photoURL: photo
                 }
                 updateUser(profile)
+                saveUer(data.name, user.email)
             })
             .catch(err => {
                 console.error(err)
@@ -53,6 +55,21 @@ const Register = () => {
             })
             .catch(err => {
                 console.log(err)
+            })
+    }
+    const saveUer = (name, email) => {
+        const user = { name, email }
+        console.log(name, email)
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
             })
     }
     return (
