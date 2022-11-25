@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import Category from '../Category/Category';
 
 const AddCar = () => {
-    const currentdate = new Date().toLocaleTimeString();
+    const currentdate = new Date().toLocaleString();
     const { register, handleSubmit, formState: { errors } } = useForm()
     const imageApiKey = process.env.REACT_APP_imgkey;
     const [photo, setPhoto] = useState(null)
@@ -30,8 +31,23 @@ const AddCar = () => {
                         location: data.location,
                         originalPrice: data.OriginalPrice,
                         resalePrice: data.NewPrice,
-                        yearsOfUse: data.YearsOfUse
+                        yearsOfUse: data.YearsOfUse,
+                        postDate: currentdate
                     }
+                    fetch('http://localhost:5000/cars', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(product),
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            if (data.acknowledged) {
+                                toast.success('Your car added successfully')
+                            }
+                        })
                 }
             })
 
