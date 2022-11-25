@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../components/Context/AuthProvider/AuthProvider';
 
 const Login = () => {
+    const { } = useState(AuthContext)
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
