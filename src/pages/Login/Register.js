@@ -8,7 +8,6 @@ import './register.css'
 const Register = () => {
     const { registration, updateUserProfile } = useContext(AuthContext)
     const [registrationError, setRegistrationError] = useState('')
-    let photo;
     const { register, handleSubmit, formState: { errors } } = useForm()
     const imageApiKey = process.env.REACT_APP_imgkey;
     console.log(imageApiKey)
@@ -27,25 +26,23 @@ const Register = () => {
             .then(imgData => {
                 if (imgData.success) {
                     // console.log(imgData.data.url)
-                    photo = imgData.data.url
+                    registration(data.email, data.password)
+                        .then(res => {
+                            const user = res.user;
+                            toast.success('Your account is created successfully')
+                            console.log(user)
+                            const profile = {
+                                displayName: data.name,
+                                photoURL: imgData.data.url
+                            }
+                            updateUser(profile)
+                            saveUer(data.name, user.email)
+                        })
+                        .catch(err => {
+                            console.error(err)
+                            setRegistrationError(err.message)
+                        })
                 }
-            })
-        console.log(photo)
-        registration(data.email, data.password)
-            .then(res => {
-                const user = res.user;
-                toast.success('Your account is created successfully')
-                console.log(user)
-                const profile = {
-                    displayName: data.name,
-                    photoURL: photo
-                }
-                updateUser(profile)
-                saveUer(data.name, user.email)
-            })
-            .catch(err => {
-                console.error(err)
-                setRegistrationError(err.message)
             })
     }
     const updateUser = profile => {

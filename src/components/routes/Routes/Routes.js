@@ -6,6 +6,7 @@ import Home from "../../../pages/Home/Home/Home";
 import Login from "../../../pages/Login/Login";
 import Register from "../../../pages/Login/Register";
 import ErrorPage from "../../../pages/shared/ErrorPage/ErrorPage";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -27,7 +28,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                element: <Category></Category>
+                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`),
+                element: <PrivateRoute><Category></Category></PrivateRoute>
             },
             {
                 path: '/addCar',

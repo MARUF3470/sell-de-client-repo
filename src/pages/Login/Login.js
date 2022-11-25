@@ -1,13 +1,18 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../components/Context/AuthProvider/AuthProvider';
 
 const Login = () => {
     const { userLogin, setUser } = useContext(AuthContext)
     const [singinError, setSigninError] = useState('')
     const [userRole, setUserRole] = useState('')
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    const from = location.state?.from?.pathname || '/'
+
     const { register, handleSubmit, formState: { errors } } = useForm()
     const handleLogin = (data) => {
         //console.log(data)
@@ -44,6 +49,7 @@ const Login = () => {
                     setUser(user)
                 }
             })
+        navigate(from, { replace: true })
     }
     return (
         <div className='bg-base-200'>
