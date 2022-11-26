@@ -30,13 +30,13 @@ const Register = () => {
                         .then(res => {
                             const user = res.user;
                             toast.success('Your account is created successfully')
-                            console.log(user)
+                            //    console.log(user)
                             const profile = {
                                 displayName: data.name,
                                 photoURL: imgData.data.url
                             }
                             updateUser(profile)
-                            saveUer(data.name, user.email)
+                            saveUer(data.name, user.email, imgData.data.url)
                         })
                         .catch(err => {
                             console.error(err)
@@ -54,9 +54,9 @@ const Register = () => {
                 console.log(err)
             })
     }
-    const saveUer = (name, email) => {
-        const user = { name, email }
-        console.log(name, email)
+    const saveUer = (name, email, image) => {
+        const user = { name, email, image }
+        console.log(name, email, image)
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {

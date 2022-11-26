@@ -4,9 +4,7 @@ import Car from './car/Car';
 
 const Category = () => {
     const cars = useLoaderData()
-    // console.log(data)
-    // const { category, image, location, originalPrice, postDate, productName, resalePrice, sellerName, yearsOfUse
-    // } = data
+
     return (
         <div>
             {
