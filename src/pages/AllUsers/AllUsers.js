@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const AllUsers = () => {
     const { data: users = [], refetch, isLoading } = useQuery(
@@ -17,7 +18,17 @@ const AllUsers = () => {
     }
     //  console.log(users)
     const handleMakeSeller = (id) => {
-        fetch('http://localhost:5000/users')
+        console.log(id)
+        fetch(`http://localhost:5000/users/${id}`, {
+            method: 'PUT',
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('User account is upgraded as a seller account')
+                }
+                refetch()
+            })
     }
     return (
         <div className="overflow-x-auto w-full">
