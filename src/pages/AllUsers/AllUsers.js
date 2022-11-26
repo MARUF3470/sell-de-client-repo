@@ -30,6 +30,18 @@ const AllUsers = () => {
                 refetch()
             })
     }
+    const handleMakeValid = (id) => {
+        fetch(`http://localhost:5000/users/valid/${id}`, {
+            method: 'PUT',
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('User account is upgraded as a seller account')
+                }
+                refetch()
+            })
+    }
     return (
         <div className="overflow-x-auto w-full">
             <table className="table w-full">
@@ -41,6 +53,8 @@ const AllUsers = () => {
                         <th>Email</th>
                         <th>Role</th>
                         <th>Make Seller</th>
+                        <th>Validation</th>
+                        <th>Delete User</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,7 +82,13 @@ const AllUsers = () => {
                                 {user?.role ? <p className='uppercase'>{user.role}</p> : 'USER'}
                             </td>
                             <th>
-                                {!user?.role ? <button onClick={() => handleMakeSeller(user._id)} className="btn btn-ghost btn-xs">Make Seller</button> : ''}
+                                {!user?.role ? <button onClick={() => handleMakeSeller(user._id)} className="btn btn-ghost btn-xs">Make seller</button> : ''}
+                            </th>
+                            <th>
+                                {!user?.valid ? <button onClick={() => handleMakeValid(user._id)} className="btn btn-ghost btn-xs">Make validate</button> : 'Validated'}
+                            </th>
+                            <th>
+                                {user?.role === 'admin' ? '' : <button>Delete</button>}
                             </th>
                         </tr>)
                     }
