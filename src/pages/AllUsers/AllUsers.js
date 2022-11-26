@@ -42,6 +42,19 @@ const AllUsers = () => {
                 refetch()
             })
     }
+    const handleUserDelete = (id) => {
+        fetch(`http://localhost:5000/users/delete/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.deletedCount > 0) {
+                    toast.success("Successfully deleted one document.");
+                }
+                refetch()
+            })
+    }
     return (
         <div className="overflow-x-auto w-full">
             <table className="table w-full">
@@ -88,7 +101,7 @@ const AllUsers = () => {
                                 {!user?.valid ? <button onClick={() => handleMakeValid(user._id)} className="btn btn-ghost btn-xs">Make validate</button> : 'Validated'}
                             </th>
                             <th>
-                                {user?.role === 'admin' ? '' : <button>Delete</button>}
+                                {user?.role === 'admin' ? '' : <button onClick={() => handleUserDelete(user._id)} className='btn btn-sm'>Delete</button>}
                             </th>
                         </tr>)
                     }
