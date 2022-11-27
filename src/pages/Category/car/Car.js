@@ -1,8 +1,19 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
+import { FaCheckCircle } from "react-icons/fa";
 const Car = ({ car, setBookedCar }) => {
-    const { category, image, location, originalPrice, postDate, productName, resalePrice, sellerName, yearsOfUse
-    } = car
+    const { category, image, location, originalPrice, postDate, productName, resalePrice, sellerName, yearsOfUse,
+        email } = car
+    const [valid, setValid] = useState('')
+    console.log(email)
+    useEffect(() => {
+        fetch('http://localhost:5000/users')
+            .then(res => res.json())
+            .then(data => {
+                const currentUser = data.find(sData => sData.email === email)
+                console.log(currentUser)
+                setValid(currentUser.valid)
+            })
+    }, [])
     return (
         <div className="hero p-5 bg-base-200 lg:w-3/4 mx-auto rounded my-5">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -13,7 +24,7 @@ const Car = ({ car, setBookedCar }) => {
                     <p className="py-2 font-semibold">Resale Price: {resalePrice}</p>
                     <p className="py-2 font-semibold">Original: price{originalPrice}</p>
                     <p className="py-2 font-semibold">Years of Use: {yearsOfUse}</p>
-                    <p className="py-2 font-semibold">Seller Name: {sellerName}</p>
+                    <p className="py-2 font-semibold inline-flex items-center gap-1">Seller Name: {sellerName} <span>{valid === 'validated' && <FaCheckCircle></FaCheckCircle>}</span> </p>
                     <p className="py-2 font-semibold">Post Time: {postDate}</p>
                     <label htmlFor="booking-modal" onClick={() => setBookedCar(car)} className="btn btn-primary">open modal</label>
                 </div>

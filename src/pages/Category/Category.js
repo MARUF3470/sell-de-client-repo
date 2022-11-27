@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import BookingModal from './BookingModal/BookingModal';
 import Car from './car/Car';
@@ -7,6 +7,7 @@ const Category = () => {
     const cars = useLoaderData()
     const [bookedCar, setBookedCar] = useState(null)
     console.log(bookedCar)
+
 
     return (
         <div>

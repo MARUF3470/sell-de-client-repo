@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
+
 const AddCar = () => {
+
     const currentdate = new Date().toLocaleString();
     const { register, handleSubmit, formState: { errors } } = useForm()
     const imageApiKey = process.env.REACT_APP_imgkey;
@@ -20,6 +22,7 @@ const AddCar = () => {
                 if (imgData.success) {
                     const product = {
                         sellerName: data.YourName,
+                        email: data.email,
                         productName: data.ProductName,
                         image: imgData.data.url,
                         category: data.category,
@@ -46,6 +49,7 @@ const AddCar = () => {
                 }
             })
 
+
     }
     return (
         <form onSubmit={handleSubmit(handleAddProduct)} className='my-6 '>
@@ -54,8 +58,15 @@ const AddCar = () => {
                 <label className="label">
                     <span className="label-text">Your Name</span>
                 </label>
-                <input type="text" {...register('YourName', { required: 'Put a YourName' })} placeholder="YourName" className="input input-bordered w-1/2" />
+                <input type="text" {...register('YourName', { required: 'Put YourName' })} placeholder="YourName" className="input input-bordered w-1/2" />
                 {errors.YourName && <p className='text-error'>{errors.YourName.message}</p>}
+            </div>
+            <div className="form-control w-1/2 mx-auto mt-2">
+                <label className="label">
+                    <span className="label-text">Your Email</span>
+                </label>
+                <input type="text" {...register('email', { required: 'Put your email' })} placeholder="email" className="input input-bordered w-1/2" />
+                {errors.email && <p className='text-error'>{errors.email.message}</p>}
             </div>
             <div className="form-control w-1/2 mx-auto mt-2">
                 <label className="label">
