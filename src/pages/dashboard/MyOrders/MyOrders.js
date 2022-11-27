@@ -1,6 +1,7 @@
 import { async } from '@firebase/util';
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../components/Context/AuthProvider/AuthProvider';
 
 const MyOrders = () => {
@@ -17,6 +18,18 @@ const MyOrders = () => {
     )
     if (isLoading) {
         return <progress className="progress w-56 text-center"></progress>
+    }
+    const handleDetele = (id) => {
+        fetch(`http://localhost:5000/bookings/${id}`, {
+            method: 'Delete'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success("Successfully deleted one car.");
+                }
+                refetch()
+            })
     }
     return (
         <div>
@@ -38,7 +51,7 @@ const MyOrders = () => {
                                 <td>{booking.carName}</td>
                                 <td>{booking.userName}</td>
                                 <td>{booking.price}</td>
-                                <td><button className='btn btn-sm btn-outline'>Delete</button></td>
+                                <td><button onClick={() => handleDetele(booking._id)} className='btn btn-sm btn-outline'>Delete</button></td>
                             </tr>)
                         }
                     </tbody>

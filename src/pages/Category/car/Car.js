@@ -26,7 +26,7 @@ const Car = ({ car, setBookedCar }) => {
                     <p className="py-2 font-semibold">Years of Use: {yearsOfUse}</p>
                     <p className="py-2 font-semibold inline-flex items-center gap-1">Seller Name: {sellerName} <span>{valid === 'validated' && <FaCheckCircle></FaCheckCircle>}</span> </p>
                     <p className="py-2 font-semibold">Post Time: {postDate}</p>
-                    <label htmlFor="booking-modal" onClick={() => setBookedCar(car)} className="btn btn-primary">open modal</label>
+                    <label htmlFor="booking-modal" onClick={() => setBookedCar(car)} className="btn btn-primary">Book Now</label>
                 </div>
             </div>
         </div>

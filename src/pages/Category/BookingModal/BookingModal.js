@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
+
 import { AuthContext } from '../../../components/Context/AuthProvider/AuthProvider';
 
 const BookingModal = ({ bookedCar }) => {
     const { user } = useContext(AuthContext)
+
     const { productName, resalePrice } = bookedCar
+    console.log(bookedCar)
     const handleBooking = event => {
         event.preventDefault()
         const form = event.target;
@@ -34,10 +37,12 @@ const BookingModal = ({ bookedCar }) => {
                 console.log(data)
                 if (data.acknowledged) {
                     toast.success(`Your booked this ${carName}`)
+                    event.target.reset()
                 }
             })
 
     }
+
     return (
         <div>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -73,13 +78,13 @@ const BookingModal = ({ bookedCar }) => {
                         <label className="label">
                             <span className="label-text">Phone Number</span>
                         </label>
-                        <input type="number" name='number' placeholder="Phone Number" className="input input-bordered w-full max-w-xs" />
+                        <input type="number" name='number' placeholder="Phone Number" required className="input input-bordered w-full max-w-xs" />
                     </div>
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
                             <span className="label-text">Pick Up Location</span>
                         </label>
-                        <input type="text" name='location' placeholder="From where you want to pick up" className="input input-bordered w-full max-w-xs" />
+                        <input type="text" name='location' required placeholder="From where you want to pick up" className="input input-bordered w-full max-w-xs" />
                     </div>
                     <input type="submit" className='btn btn-wide btn-sm mt-3 mx-auto' value="Submit" />
                 </form>
