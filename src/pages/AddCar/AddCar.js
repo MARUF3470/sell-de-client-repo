@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
@@ -19,8 +18,6 @@ const AddCar = () => {
             .then(res => res.json())
             .then(imgData => {
                 if (imgData.success) {
-                    // console.log(imgData.data.url)
-                    //setPhoto(imgData.data.url)
                     const product = {
                         sellerName: data.YourName,
                         productName: data.ProductName,

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { json, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../components/Context/AuthProvider/AuthProvider';
 
 const Header = () => {
@@ -9,23 +9,12 @@ const Header = () => {
     const handleLogout = () => {
         logOut()
             .then(res => {
-                window.location.reload()
+
             })
             .catch(err => console.log(err))
 
     }
 
-    // console.log(savedUserData)
-
-    // const handleUser = role => {
-    //     console.log(role)
-    //     fetch(`http://localhost:5000/users/role?email=${user.email}&&role=${role}`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data)
-    //         })
-    // }
-    // console.log(savedUserData)
     const menu = <>
         <li><Link className='btn btn-ghost' to='/'>Home</Link></li>
         {
