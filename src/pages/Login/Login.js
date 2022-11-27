@@ -5,9 +5,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../components/Context/AuthProvider/AuthProvider';
 
 const Login = () => {
-    const { userLogin, setUser } = useContext(AuthContext)
+    const { userLogin } = useContext(AuthContext)
     const [singinError, setSigninError] = useState('')
-    const [userRole, setUserRole] = useState('')
+
     const location = useLocation()
     const navigate = useNavigate()
 
@@ -22,47 +22,38 @@ const Login = () => {
                 const user = res.user;
                 toast.success('Login successful')
                 handleUserRole(user)
+                navigate(from, { replace: true })
             })
             .catch(err => {
                 console.log(err)
                 setSigninError(err.message)
             })
     }
-    const handleUser = event => {
-        setUserRole(event.target.value)
-    }
+
     const handleUserRole = (user) => {
         // console.log(user)
-        fetch('http://localhost:5000/users')
-            .then(res => res.json())
-            .then(data => {
-                //console.log(data)
-                const savedUser = data.find(sData => sData.email === user.email)
-                /// console.log(savedUser)
-                if (savedUser.role === 'admin' && userRole === 'admin') {
-                    setUser({ ...user, role: 'admin' })
-                }
-                else if (savedUser.role === 'seller' && userRole === 'seller') {
-                    setUser({ ...user, role: 'seller' })
-                }
-                else {
-                    setUser(user)
-                }
-            })
-        navigate(from, { replace: true })
+        // fetch('http://localhost:5000/users')
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         //console.log(data)
+        //         const savedUser = data.find(sData => sData.email === user.email)
+        //         /// console.log(savedUser)
+        //         if (savedUser.role === 'admin' && userRole === 'admin') {
+
+        //         }
+        //         else if (savedUser.role === 'seller' && userRole === 'seller') {
+
+        //         }
+        //         else {
+
+        //         }
+        //     })
+
     }
+
     return (
+
         <div className='bg-base-200'>
-            <div className='my-6 mx-4'>
-                <label className="label">
-                    <span className="label-text font-bold">Select the option if you are admin or seller.</span>
-                </label>
-                <select onChange={handleUser} name='userinfo' className="select select-bordered w-full max-w-xs">
-                    <option value={null}>User</option>
-                    <option value='admin'>Admin</option>
-                    <option value='seller'>Seller</option>
-                </select>
-            </div>
             <div className="hero min-h-screen ">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
@@ -97,6 +88,8 @@ const Login = () => {
                 </div>
             </div>
         </div>
+
+
     );
 };
 

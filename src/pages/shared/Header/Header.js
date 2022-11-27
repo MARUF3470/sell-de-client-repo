@@ -1,34 +1,39 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { json, Link } from 'react-router-dom';
 import { AuthContext } from '../../../components/Context/AuthProvider/AuthProvider';
 
 const Header = () => {
     const { logOut, user } = useContext(AuthContext)
+
     console.log(user)
     const handleLogout = () => {
         logOut()
-            .then(res => { })
+            .then(res => {
+                window.location.reload()
+            })
             .catch(err => console.log(err))
+
     }
+
+    // console.log(savedUserData)
+
+    // const handleUser = role => {
+    //     console.log(role)
+    //     fetch(`http://localhost:5000/users/role?email=${user.email}&&role=${role}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data)
+    //         })
+    // }
+    // console.log(savedUserData)
     const menu = <>
         <li><Link className='btn btn-ghost' to='/'>Home</Link></li>
         {
-            !user?.email && <><li><Link className='btn btn-ghost' to='/login'>Login</Link></li>
-                <li><Link className='btn btn-ghost' to='/register'>Register</Link></li></>
-        }
-        {
-            user?.role === 'admin' &&
-            <>
-                <li><Link className='btn btn-ghost' to='/allUsers'>All Users</Link></li>
+            !user?.email ? <><li ><Link className='btn btn-ghost' to='/login'>Login</Link></li>
+                <li><Link className='btn btn-ghost' to='/register'>Register</Link></li></> : <>
+                <li><Link className='btn btn-ghost' to='/dashboard'>Dashboard</Link></li>
             </>
         }
-        {
-            user?.role === 'seller' &&
-            <>
-                <li><Link className='btn btn-ghost' to='/addCar'>Add Car</Link></li>
-            </>
-        }
-
     </>
     return (
         <div>

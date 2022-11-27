@@ -28,7 +28,7 @@ const Car = ({ car }) => {
                     <p className="py-2 font-semibold">Years of Use: {yearsOfUse}</p>
                     <p className="py-2 font-semibold">Seller Name: {sellerName}</p>
                     <p className="py-2 font-semibold">Post Time: {postDate}</p>
-                    <button className="btn btn-primary">Book Now</button>
+                    <button className="btn btn-primary" >Book Now</button>
                 </div>
             </div>
         </div>

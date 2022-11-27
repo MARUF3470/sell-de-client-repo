@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import Category from '../Category/Category';
 
 const AddCar = () => {
     const currentdate = new Date().toLocaleString();
     const { register, handleSubmit, formState: { errors } } = useForm()
     const imageApiKey = process.env.REACT_APP_imgkey;
-    const [photo, setPhoto] = useState(null)
     const handleAddProduct = data => {
         console.log(data)
         const image = data.image[0];
