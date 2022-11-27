@@ -36,7 +36,7 @@ const Register = () => {
                                 photoURL: imgData.data.url
                             }
                             updateUser(profile)
-                            saveUer(data.name, user.email, imgData.data.url)
+                            saveUer(data.name, data.role, user.email, imgData.data.url)
                         })
                         .catch(err => {
                             console.error(err)
@@ -54,9 +54,9 @@ const Register = () => {
                 console.log(err)
             })
     }
-    const saveUer = (name, email, image) => {
-        const user = { name, email, image }
-        console.log(name, email, image)
+    const saveUer = (name, role, email, image) => {
+        const user = { name, role, email, image }
+        //mconsole.log(name, email, image)
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
@@ -78,6 +78,17 @@ const Register = () => {
                 </div>
                 <form onSubmit={handleSubmit(handleLogin)} className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <div className="card-body">
+                        <div>
+                            <label className="label">
+                                <span className="label-text">What type of account you want to create?</span>
+                            </label>
+                            <select {...register('role')} className="select select-bordered w-full max-w-xs">
+                                <option value='buyer' disabled>Selete your account type</option>
+                                <option value='buyer'>Buyer</option>
+                                <option value='seller'>Seller</option>
+                            </select>
+                        </div>
+
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Name</span>
