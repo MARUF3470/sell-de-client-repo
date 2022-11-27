@@ -30,7 +30,9 @@ const AddCar = () => {
                         originalPrice: data.OriginalPrice,
                         resalePrice: data.NewPrice,
                         yearsOfUse: data.YearsOfUse,
-                        postDate: currentdate
+                        condition: data.conditions,
+                        postDate: currentdate,
+                        status: 'available'
                     }
                     fetch('http://localhost:5000/cars', {
                         method: 'POST',
@@ -89,6 +91,14 @@ const AddCar = () => {
                     <option value='02'>Honda</option>
                     <option value='03'>Audi</option>
                     <option value='04'>Mercedes</option>
+                </select>
+            </div>
+            <div className="form-control w-1/2 mx-auto mt-4">
+                <label>Condition</label>
+                <select {...register('conditions', { required: 'Select car condition' })} className="select select-bordered w-full max-w-xs">
+                    <option value='excellent'>Excellent</option>
+                    <option value='good'>Good</option>
+                    <option value='fair'>Fair</option>
                 </select>
             </div>
             <div className="form-control w-1/2 mx-auto mt-2">

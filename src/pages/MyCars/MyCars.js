@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../components/Context/AuthProvider/AuthProvider';
 
 const MyCars = () => {
@@ -12,8 +13,36 @@ const MyCars = () => {
             return data
         }
     })
+    const handleDeleteCars = id => {
+        fetch(`http://localhost:5000/cars/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success("Successfully deleted one car.");
+                }
+                refetch()
+            })
+    }
     const usersCar = cars.filter(savedUser => user.email === savedUser.email)
     console.log(usersCar)
+    const handleAdvertisement = data => {
+        //console.log(data)
+        fetch('http://localhost:5000/advertice', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success(`Advertice done`)
+                }
+            })
+    }
     return (
         <div className="overflow-x-auto w-full">
             <table className="table w-full">
@@ -23,7 +52,7 @@ const MyCars = () => {
                         <th>
                         </th>
                         <th>Name</th>
-                        <th>Job</th>
+                        <th>Status</th>
                         <th>Resale Price</th>
                         <th>Delete</th>
                     </tr>
@@ -48,13 +77,11 @@ const MyCars = () => {
                                 </div>
                             </td>
                             <td>
-                                Zemlak, Daniel and Leannon
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
+                                {car?.status === 'available' ? <><span>Available</span> <button onClick={() => handleAdvertisement(car)} className='btn btn-xs btn-outline'>Advertise</button></> : 'Sold'}
                             </td>
                             <td>{car.resalePrice}</td>
                             <th>
-                                <button className="btn btn-ghost btn-xs">Delete</button>
+                                <button onClick={() => handleDeleteCars(car._id)} className="btn btn-ghost btn-xs">Delete</button>
                             </th>
                         </tr>)
                     }

@@ -6,7 +6,7 @@ import { AuthContext } from '../../../components/Context/AuthProvider/AuthProvid
 const BookingModal = ({ bookedCar }) => {
     const { user } = useContext(AuthContext)
 
-    const { productName, resalePrice } = bookedCar
+    const { productName, resalePrice, image } = bookedCar
     console.log(bookedCar)
     const handleBooking = event => {
         event.preventDefault()
@@ -24,6 +24,7 @@ const BookingModal = ({ bookedCar }) => {
             price,
             number,
             location,
+            image
         }
         fetch('http://localhost:5000/bookings', {
             method: 'POST',

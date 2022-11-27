@@ -41,6 +41,7 @@ const MyOrders = () => {
                             <th>Car Name</th>
                             <th>Buyer Name</th>
                             <th>Price</th>
+                            <th>Buy</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -48,9 +49,20 @@ const MyOrders = () => {
                         {
                             bookings.map((booking, i) => <tr key={booking._id}>
                                 <th>{i + 1}</th>
-                                <td>{booking.carName}</td>
+                                <div className="flex items-center space-x-3">
+                                    <div className="avatar">
+                                        <div className="mask mask-squircle w-12 h-12">
+                                            <img src={booking.image} alt='' />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="font-bold">{booking.carName}</div>
+
+                                    </div>
+                                </div>
                                 <td>{booking.userName}</td>
                                 <td>{booking.price}</td>
+                                <td><button className='btn btn-sm btn-outline'>Pay</button></td>
                                 <td><button onClick={() => handleDetele(booking._id)} className='btn btn-sm btn-outline'>Delete</button></td>
                             </tr>)
                         }

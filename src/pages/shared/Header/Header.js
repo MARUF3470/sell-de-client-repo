@@ -18,6 +18,7 @@ const Header = () => {
     const menu = <>
         <li><Link className='btn btn-ghost' to='/'>Home</Link></li>
         <li><Link className='btn btn-ghost' to='/blog'>Blog</Link></li>
+        <li><Link className='btn btn-ghost' to='/faq'>faq</Link></li>
         {
             !user?.email ? <><li ><Link className='btn btn-ghost' to='/login'>Login</Link></li>
                 <li><Link className='btn btn-ghost' to='/register'>Register</Link></li></> : <>
