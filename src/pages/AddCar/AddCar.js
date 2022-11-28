@@ -1,13 +1,15 @@
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../components/Context/AuthProvider/AuthProvider';
 
 
 const AddCar = () => {
-
+    const { user } = useContext(AuthContext)
     const currentdate = new Date().toLocaleString();
     const { register, handleSubmit, formState: { errors } } = useForm()
     const imageApiKey = process.env.REACT_APP_imgkey;
-    const handleAddProduct = data => {
+    const handleAddProduct = (data, event) => {
         console.log(data)
         const image = data.image[0];
         const formData = new FormData();
@@ -46,6 +48,7 @@ const AddCar = () => {
                             console.log(data)
                             if (data.acknowledged) {
                                 toast.success('Your car added successfully')
+                                event.target.reset()
                             }
                         })
                 }
@@ -60,14 +63,14 @@ const AddCar = () => {
                 <label className="label">
                     <span className="label-text">Your Name</span>
                 </label>
-                <input type="text" {...register('YourName', { required: 'Put YourName' })} placeholder="YourName" className="input input-bordered w-1/2" />
+                <input type="text" defaultValue={user.displayName} selected {...register('YourName', { required: 'Put YourName' })} placeholder="YourName" className="input input-bordered w-1/2" />
                 {errors.YourName && <p className='text-error'>{errors.YourName.message}</p>}
             </div>
             <div className="form-control w-1/2 mx-auto mt-2">
                 <label className="label">
                     <span className="label-text">Your Email</span>
                 </label>
-                <input type="text" {...register('email', { required: 'Put your email' })} placeholder="email" className="input input-bordered w-1/2" />
+                <input type="text" defaultValue={user.email} selected {...register('email', { required: 'Put your email' })} placeholder="email" className="input input-bordered w-1/2" />
                 {errors.email && <p className='text-error'>{errors.email.message}</p>}
             </div>
             <div className="form-control w-1/2 mx-auto mt-2">

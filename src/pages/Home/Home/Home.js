@@ -1,5 +1,8 @@
+import { async } from '@firebase/util';
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Advertisement from '../../Advertisement/Advertisement';
 import Banner from '../Banner/Banner';
 
 const Home = () => {
@@ -21,6 +24,19 @@ const Home = () => {
             name: 'Mercedes'
         },
     ]
+    const { data: advertisements = [], refetch, isLoading } = useQuery(
+        {
+            queryKey: [],
+            queryFn: async () => {
+                const res = await fetch('http://localhost:5000/car/advertice')
+                const data = await res.json()
+                return data
+            }
+        }
+    )
+
+    console.log(advertisements)
+
     return (
         <div>
             <div className='lg:grid grid-cols-3 flex-row gap-2 items-center '>
@@ -38,6 +54,16 @@ const Home = () => {
                     }
                 </div>
             </div>
+            {advertisements.length > 0 &&
+                <div className='w-3/4 mx-auto'>
+                    <h1 className='font-semibold text-3xl text-center'>Advertisements</h1>
+                    <div className='grid grid-cols-1 lg:grid-cols-3'>
+                        {
+                            advertisements.map(advertisement => <Advertisement key={advertisement._id} advertisement={advertisement}></Advertisement>)
+                        }
+                    </div>
+                </div>
+            }
         </div>
     );
 };

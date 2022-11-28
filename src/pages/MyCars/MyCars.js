@@ -14,7 +14,7 @@ const MyCars = () => {
         }
     })
     if (isLoading) {
-        return <progress className="progress w-56"></progress>
+        return <progress className="progress w-56 mx-auto"></progress>
     }
     const handleDeleteCars = id => {
         fetch(`http://localhost:5000/cars/${id}`, {
@@ -32,7 +32,7 @@ const MyCars = () => {
     console.log(usersCar)
     const handleAdvertisement = data => {
         console.log(data)
-        fetch('http://localhost:5000/advertice', {
+        fetch('http://localhost:5000/car/advertice', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const MyCars = () => {
                                 </div>
                             </td>
                             <td>
-                                {car?.status === 'available' ? <><span>Available</span> <button onClick={() => handleAdvertisement(car)} className='btn btn-xs btn-outline'>Advertise</button></> : 'Sold'}
+                                {car?.status === 'available' ? <><span>Available</span> <button onClick={() => handleAdvertisement({ id: car._id, carName: car.productName, price: car.resalePrice, image: car.image, email: car.email, useyears: car.yearsOfUse })} className='btn btn-xs btn-outline'>Advertise</button></> : 'Sold'}
                             </td>
                             <td>{car.resalePrice}</td>
                             <th>

@@ -49,7 +49,7 @@ const MyOrders = () => {
                         {
                             bookings.map((booking, i) => <tr key={booking._id}>
                                 <th>{i + 1}</th>
-                                <div className="flex items-center space-x-3">
+                                <th className="flex items-center space-x-3">
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
                                             <img src={booking.image} alt='' />
@@ -59,7 +59,7 @@ const MyOrders = () => {
                                         <div className="font-bold">{booking.carName}</div>
 
                                     </div>
-                                </div>
+                                </th>
                                 <td>{booking.userName}</td>
                                 <td>{booking.price}</td>
                                 <td><button className='btn btn-sm btn-outline'>Pay</button></td>
