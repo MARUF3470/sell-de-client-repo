@@ -10,7 +10,11 @@ const MyOrders = () => {
         {
             queryKey: ['bookings', user.email],
             queryFn: async () => {
-                const req = await fetch(`http://localhost:5000/bookings/${user.email}`)
+                const req = await fetch(`http://localhost:5000/bookings/${user.email},`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('genius-token')}`
+                    }
+                })
                 const data = await req.json()
                 return data;
             }

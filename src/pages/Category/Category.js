@@ -15,7 +15,7 @@ const Category = () => {
                 cars.map(car => <Car key={car._id} car={car} setBookedCar={setBookedCar}></Car>)
             }
             {
-                bookedCar && <BookingModal bookedCar={bookedCar}></BookingModal>
+                bookedCar && <BookingModal bookedCar={bookedCar} setBookedCar={setBookedCar}></BookingModal>
             }
         </div>
     );

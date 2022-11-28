@@ -10,9 +10,6 @@ const Advertisement = ({ advertisement }) => {
                 <p>Price: {price}</p>
                 <p>Seller Email: {email}</p>
                 <p>Used Years: {useyears}</p>
-                {/* <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Book now</button>
-                </div> */}
             </div>
         </div>
     );

@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../components/Context/AuthProvider/AuthProvider';
 import './register.css'
 
 const Register = () => {
     const { registration, updateUserProfile } = useContext(AuthContext)
+    const navigate = useNavigate()
     const [registrationError, setRegistrationError] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm()
     const imageApiKey = process.env.REACT_APP_imgkey;
@@ -30,6 +31,27 @@ const Register = () => {
                         .then(res => {
                             const user = res.user;
                             toast.success('Your account is created successfully')
+                            const currentUser = {
+                                email: user.email
+                            }
+
+                            console.log(currentUser);
+
+                            // get jwt token
+                            fetch('http://localhost:5000/jwt', {
+                                method: 'POST',
+                                headers: {
+                                    'content-type': 'application/json'
+                                },
+                                body: JSON.stringify(currentUser)
+                            })
+                                .then(res => res.json())
+                                .then(data => {
+                                    console.log(data);
+
+                                    localStorage.setItem('sell-de-token', data.token);
+                                });
+
                             //    console.log(user)
                             const profile = {
                                 displayName: data.name,
@@ -48,7 +70,7 @@ const Register = () => {
     const updateUser = profile => {
         updateUserProfile(profile)
             .then(() => {
-
+                navigate('/')
             })
             .catch(err => {
                 console.log(err)

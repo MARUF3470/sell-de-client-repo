@@ -38,7 +38,7 @@ const Header = () => {
                             {menu}
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost text-xl">Sell De</Link>
+                    <Link to='/' className="btn btn-ghost text-xl"> <img src="https://static.vecteezy.com/system/resources/previews/005/484/215/original/super-car-logo-free-vector.jpg" className=' w-0 lg:w-16' alt="" />  Sell De</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
@@ -46,8 +46,12 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
+                    <div className='mr-2 flex items-center gap-2'>
+                        <img className='w-14 rounded-full' src={user?.photoURL} alt="" />
+                        <p>{user?.displayName}</p>
+                    </div>
                     {
-                        user?.email && <button onClick={handleLogout} className='btn'>LogOut</button>
+                        user?.email && <button onClick={handleLogout} className='btn btn-sm'>LogOut</button>
                     }
                 </div>
             </div>

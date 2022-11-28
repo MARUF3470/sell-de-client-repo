@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 
 import { AuthContext } from '../../../components/Context/AuthProvider/AuthProvider';
 
-const BookingModal = ({ bookedCar }) => {
+const BookingModal = ({ bookedCar, setBookedCar }) => {
     const { user } = useContext(AuthContext)
 
     const { productName, resalePrice, image } = bookedCar
@@ -43,6 +43,9 @@ const BookingModal = ({ bookedCar }) => {
             })
 
     }
+    const handleClose = event => {
+        setBookedCar(null)
+    }
 
     return (
         <div>
@@ -50,7 +53,7 @@ const BookingModal = ({ bookedCar }) => {
             <div className="modal">
                 <form onSubmit={handleBooking} className="modal-box relative">
                     <h5 className="text-xl font-semibold">Booking Form</h5>
-                    <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <label htmlFor="booking-modal" onClick={() => handleClose()} className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
                             <span className="label-text">Your name</span>
@@ -90,7 +93,7 @@ const BookingModal = ({ bookedCar }) => {
                     <input type="submit" className='btn btn-wide btn-sm mt-3 mx-auto' value="Submit" />
                 </form>
             </div>
-        </div>
+        </div >
     );
 };
 

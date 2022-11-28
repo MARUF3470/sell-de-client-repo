@@ -20,9 +20,27 @@ const Login = () => {
         userLogin(data.email, data.password)
             .then(res => {
                 const user = res.user;
-                toast.success('Login successful')
-                handleUserRole(user)
-                navigate(from, { replace: true })
+                const currentUser = {
+                    email: user.email
+                }
+
+                console.log(currentUser);
+
+                // get jwt token
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+
+                        localStorage.setItem('sell-de-token', data.token);
+                        navigate(from, { replace: true });
+                    });
             })
             .catch(err => {
                 console.log(err)
@@ -54,7 +72,27 @@ const Login = () => {
         googleLogin()
             .then(res => {
                 const user = res.user;
-                navigate(from, { replace: true })
+                const currentUser = {
+                    email: user.email
+                }
+
+                console.log(currentUser);
+
+                // get jwt token
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+
+                        localStorage.setItem('sell-de-token', data.token);
+                        navigate(from, { replace: true });
+                    });
             })
             .catch(err => console.log(err))
     }

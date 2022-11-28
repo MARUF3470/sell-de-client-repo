@@ -7,7 +7,11 @@ const AllBuyers = () => {
         {
             queryKey: ['buyers'],
             queryFn: async () => {
-                const res = await fetch(`http://localhost:5000/buyers`)
+                const res = await fetch(`http://localhost:5000/buyers`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('genius-token')}`
+                    }
+                })
                 const data = await res.json();
                 return data;
             }
