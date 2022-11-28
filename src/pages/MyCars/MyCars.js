@@ -13,6 +13,9 @@ const MyCars = () => {
             return data
         }
     })
+    if (isLoading) {
+        return <progress className="progress w-56"></progress>
+    }
     const handleDeleteCars = id => {
         fetch(`http://localhost:5000/cars/${id}`, {
             method: 'DELETE'
@@ -28,7 +31,7 @@ const MyCars = () => {
     const usersCar = cars.filter(savedUser => user.email === savedUser.email)
     console.log(usersCar)
     const handleAdvertisement = data => {
-        //console.log(data)
+        console.log(data)
         fetch('http://localhost:5000/advertice', {
             method: 'POST',
             headers: {

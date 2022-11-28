@@ -6,16 +6,6 @@ import Header from '../../pages/shared/Header/Header';
 
 const DashBoardLayout = () => {
     const { user } = useContext(AuthContext)
-    // const [savedUserData, setSavedUserData] = useState(null)
-    // const handleUser = role => {
-    //     console.log(role)
-    //     fetch(`http://localhost:5000/users/role?email=${user.email}&&role=${role}`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data)
-    //             setSavedUserData(data)
-    //         })
-    // }
     const { data: savedUsers = [], refetch, isLoading } = useQuery(
         {
             queryKey: ['users', user.email],
@@ -47,6 +37,8 @@ const DashBoardLayout = () => {
                             savedUsers?.role === 'admin' &&
                             <>
                                 <li><Link to='/dashboard/allusers'>All Users</Link></li>
+                                <li><Link to='/dashboard/allbuyers'>All Buyers</Link></li>
+                                <li><Link to='/dashboard/allsellers'>All Sellers</Link></li>
                             </>
                         }
                         {

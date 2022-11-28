@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
 
-const AllUsers = () => {
+const AllBuyers = () => {
     const { data: users = [], refetch, isLoading } = useQuery(
         {
-            queryKey: ['users'],
+            queryKey: ['buyers'],
             queryFn: async () => {
-                const res = await fetch('http://localhost:5000/users')
+                const res = await fetch(`http://localhost:5000/buyers`)
                 const data = await res.json();
                 return data;
             }
@@ -16,34 +16,8 @@ const AllUsers = () => {
     if (isLoading) {
         return <progress className="progress w-56"></progress>
     }
-    //  console.log(users)
-    const handleMakeSeller = (id) => {
-        console.log(id)
-        fetch(`http://localhost:5000/users/${id}`, {
-            method: 'PUT',
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    toast.success('User account is upgraded as a seller account')
-                }
-                refetch()
-            })
-    }
-    const handleMakeValid = (id) => {
-        fetch(`http://localhost:5000/users/valid/${id}`, {
-            method: 'PUT',
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    toast.success('User account is upgraded as a seller account')
-                }
-                refetch()
-            })
-    }
     const handleUserDelete = (id) => {
-        fetch(`http://localhost:5000/users/delete/${id}`, {
+        fetch(`http://localhost:5000/buyers/delete/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -64,10 +38,8 @@ const AllUsers = () => {
                         </th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Role</th>
-                        <th>Make Seller</th>
-                        <th>Validation</th>
-                        <th>Delete User</th>
+                        {/* <th>Validation</th> */}
+                        <th>Delete Seller</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -91,17 +63,11 @@ const AllUsers = () => {
                             <td>
                                 {user.email}
                             </td>
-                            <td>
-                                {user?.role ? <p className='uppercase'>{user.role}</p> : 'USER'}
-                            </td>
-                            <th>
-                                {user?.role === 'buyer' ? <button onClick={() => handleMakeSeller(user._id)} className="btn btn-ghost btn-xs">Make seller</button> : ''}
-                            </th>
-                            <th>
+                            {/* <th>
                                 {!user?.valid ? <button onClick={() => handleMakeValid(user._id)} className="btn btn-ghost btn-xs">Make validate</button> : 'Validated'}
-                            </th>
+                            </th> */}
                             <th>
-                                {user?.role === 'admin' ? '' : <button onClick={() => handleUserDelete(user._id)} className='btn btn-sm'>Delete</button>}
+                                <button onClick={() => handleUserDelete(user._id)} className='btn btn-sm'>Delete</button>
                             </th>
                         </tr>)
                     }
@@ -111,4 +77,4 @@ const AllUsers = () => {
     );
 };
 
-export default AllUsers;
+export default AllBuyers;
