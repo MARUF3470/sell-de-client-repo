@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../components/Context/AuthProvider/AuthProvider';
 
 const Login = () => {
-    const { userLogin } = useContext(AuthContext)
+    const { userLogin, googleLogin } = useContext(AuthContext)
     const [singinError, setSigninError] = useState('')
 
     const location = useLocation()
@@ -50,9 +50,16 @@ const Login = () => {
         //     })
 
     }
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(res => {
+                const user = res.user;
+                navigate(from, { replace: true })
+            })
+            .catch(err => console.log(err))
+    }
 
     return (
-
         <div className='bg-base-200'>
             <div className="hero min-h-screen ">
                 <div className="hero-content flex-col lg:flex-row-reverse">
@@ -84,6 +91,7 @@ const Login = () => {
                             </div>
                             <p className='text-error'>{singinError.split(':')[1]}</p>
                         </div>
+                        <button className='btn w-full btn-circle btn-outline' onClick={handleGoogleLogin}>Google</button>
                     </form>
                 </div>
             </div>
