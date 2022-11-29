@@ -7,9 +7,9 @@ const AllBuyers = () => {
         {
             queryKey: ['buyers'],
             queryFn: async () => {
-                const res = await fetch(`http://localhost:5000/buyers`, {
+                const res = await fetch(`https://sell-de-server.vercel.app/buyers`, {
                     headers: {
-                        authorization: `Bearer ${localStorage.getItem('genius-token')}`
+                        authorization: `Bearer ${localStorage.getItem('sell-de-token')}`
                     }
                 })
                 const data = await res.json();
@@ -21,7 +21,7 @@ const AllBuyers = () => {
         return <progress className="progress w-56"></progress>
     }
     const handleUserDelete = (id) => {
-        fetch(`http://localhost:5000/buyers/delete/${id}`, {
+        fetch(`https://sell-de-server.vercel.app/buyers/delete/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

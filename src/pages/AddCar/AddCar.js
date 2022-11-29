@@ -36,7 +36,7 @@ const AddCar = () => {
                         postDate: currentdate,
                         status: 'available'
                     }
-                    fetch('http://localhost:5000/cars', {
+                    fetch('https://sell-de-server.vercel.app/cars', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

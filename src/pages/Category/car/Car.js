@@ -6,7 +6,7 @@ const Car = ({ car, setBookedCar }) => {
     const [valid, setValid] = useState('')
     console.log(email)
     useEffect(() => {
-        fetch('http://localhost:5000/users')
+        fetch('https://sell-de-server.vercel.app/users')
             .then(res => res.json())
             .then(data => {
                 const currentUser = data.find(sData => sData.email === email)

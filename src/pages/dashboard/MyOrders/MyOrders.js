@@ -10,9 +10,9 @@ const MyOrders = () => {
         {
             queryKey: ['bookings', user.email],
             queryFn: async () => {
-                const req = await fetch(`http://localhost:5000/bookings/${user.email},`, {
+                const req = await fetch(`https://sell-de-server.vercel.app/bookings/${user.email}`, {
                     headers: {
-                        authorization: `Bearer ${localStorage.getItem('genius-token')}`
+                        authorization: `Bearer ${localStorage.getItem('sell-de-token')}`
                     }
                 })
                 const data = await req.json()
@@ -24,7 +24,7 @@ const MyOrders = () => {
         return <progress className="progress w-56 text-center"></progress>
     }
     const handleDetele = (id) => {
-        fetch(`http://localhost:5000/bookings/${id}`, {
+        fetch(`https://sell-de-server.vercel.app/bookings/${id}`, {
             method: 'Delete'
         })
             .then(res => res.json())
@@ -51,7 +51,7 @@ const MyOrders = () => {
                     </thead>
                     <tbody>
                         {
-                            bookings.map((booking, i) => <tr key={booking._id}>
+                            bookings?.map((booking, i) => <tr key={booking._id}>
                                 <th>{i + 1}</th>
                                 <th className="flex items-center space-x-3">
                                     <div className="avatar">

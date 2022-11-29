@@ -8,7 +8,7 @@ const MyCars = () => {
     const { data: cars = [], refetch, isLoading } = useQuery({
         queryKey: ['cars'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/cars')
+            const res = await fetch('https://sell-de-server.vercel.app/cars')
             const data = await res.json()
             return data
         }
@@ -17,7 +17,7 @@ const MyCars = () => {
         return <progress className="progress w-56 mx-auto"></progress>
     }
     const handleDeleteCars = id => {
-        fetch(`http://localhost:5000/cars/${id}`, {
+        fetch(`https://sell-de-server.vercel.app/cars/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -32,7 +32,7 @@ const MyCars = () => {
     console.log(usersCar)
     const handleAdvertisement = data => {
         console.log(data)
-        fetch('http://localhost:5000/car/advertice', {
+        fetch('https://sell-de-server.vercel.app/car/advertice', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

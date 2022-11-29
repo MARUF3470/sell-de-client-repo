@@ -25,9 +25,10 @@ const Login = () => {
                 }
 
                 console.log(currentUser);
+                toast.success('Login Done')
 
                 // get jwt token
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://sell-de-server.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -50,7 +51,7 @@ const Login = () => {
 
     const handleUserRole = (user) => {
         // console.log(user)
-        // fetch('http://localhost:5000/users')
+        // fetch('https://sell-de-server.vercel.app/users')
         //     .then(res => res.json())
         //     .then(data => {
         //         //console.log(data)
@@ -79,7 +80,7 @@ const Login = () => {
                 console.log(currentUser);
 
                 // get jwt token
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://sell-de-server.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

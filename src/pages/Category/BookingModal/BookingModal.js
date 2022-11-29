@@ -26,7 +26,7 @@ const BookingModal = ({ bookedCar, setBookedCar }) => {
             location,
             image
         }
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://sell-de-server.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

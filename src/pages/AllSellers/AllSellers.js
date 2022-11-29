@@ -7,7 +7,11 @@ const AllSellers = () => {
         {
             queryKey: ['sellers'],
             queryFn: async () => {
-                const res = await fetch(`http://localhost:5000/sellers`)
+                const res = await fetch(`https://sell-de-server.vercel.app/sellers`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('sell-de-token')}`
+                    }
+                })
                 const data = await res.json();
                 return data;
             }
@@ -18,7 +22,7 @@ const AllSellers = () => {
     }
     console.log(users)
     const handleMakeValid = (id) => {
-        fetch(`http://localhost:5000/sellers/valid/${id}`, {
+        fetch(`https://sell-de-server.vercel.app/sellers/valid/${id}`, {
             method: 'PUT',
         })
             .then(res => res.json())
@@ -30,7 +34,7 @@ const AllSellers = () => {
             })
     }
     const handleUserDelete = (id) => {
-        fetch(`http://localhost:5000/sellers/delete/${id}`, {
+        fetch(`https://sell-de-server.vercel.app/sellers/delete/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

@@ -10,7 +10,7 @@ const DashBoardLayout = () => {
         {
             queryKey: ['users', user.email],
             queryFn: async () => {
-                const res = await fetch(`http://localhost:5000/users/${user.email}`)
+                const res = await fetch(`https://sell-de-server.vercel.app/users/${user.email}`)
                 const data = await res.json()
                 return data
             }

@@ -7,7 +7,7 @@ const AllUsers = () => {
         {
             queryKey: ['users'],
             queryFn: async () => {
-                const res = await fetch('http://localhost:5000/users')
+                const res = await fetch('https://sell-de-server.vercel.app/users')
                 const data = await res.json();
                 return data;
             }
@@ -19,7 +19,7 @@ const AllUsers = () => {
     //  console.log(users)
     const handleMakeSeller = (id) => {
         console.log(id)
-        fetch(`http://localhost:5000/users/${id}`, {
+        fetch(`https://sell-de-server.vercel.app/users/${id}`, {
             method: 'PUT',
         })
             .then(res => res.json())
@@ -31,7 +31,7 @@ const AllUsers = () => {
             })
     }
     const handleMakeValid = (id) => {
-        fetch(`http://localhost:5000/users/valid/${id}`, {
+        fetch(`https://sell-de-server.vercel.app/users/valid/${id}`, {
             method: 'PUT',
         })
             .then(res => res.json())
@@ -43,7 +43,7 @@ const AllUsers = () => {
             })
     }
     const handleUserDelete = (id) => {
-        fetch(`http://localhost:5000/users/delete/${id}`, {
+        fetch(`https://sell-de-server.vercel.app/users/delete/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

@@ -38,7 +38,7 @@ const Register = () => {
                             console.log(currentUser);
 
                             // get jwt token
-                            fetch('http://localhost:5000/jwt', {
+                            fetch('https://sell-de-server.vercel.app/jwt', {
                                 method: 'POST',
                                 headers: {
                                     'content-type': 'application/json'
@@ -79,7 +79,7 @@ const Register = () => {
     const saveUer = (name, role, email, image) => {
         const user = { name, role, email, image }
         //mconsole.log(name, email, image)
-        fetch('http://localhost:5000/users', {
+        fetch('https://sell-de-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ const Register = () => {
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <input type="submit" className="btn btn-primary" value="Login" />
+                            <input type="submit" className="btn btn-primary" value="Register" />
                         </div>
                         <p className='text-error'>{registrationError}</p>
                     </div>
