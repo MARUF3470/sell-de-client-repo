@@ -49,26 +49,6 @@ const Login = () => {
             })
     }
 
-    const handleUserRole = (user) => {
-        // console.log(user)
-        // fetch('https://sell-de-server.vercel.app/users')
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         //console.log(data)
-        //         const savedUser = data.find(sData => sData.email === user.email)
-        //         /// console.log(savedUser)
-        //         if (savedUser.role === 'admin' && userRole === 'admin') {
-
-        //         }
-        //         else if (savedUser.role === 'seller' && userRole === 'seller') {
-
-        //         }
-        //         else {
-
-        //         }
-        //     })
-
-    }
     const handleGoogleLogin = () => {
         googleLogin()
             .then(res => {

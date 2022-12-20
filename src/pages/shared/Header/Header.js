@@ -47,7 +47,7 @@ const Header = () => {
                 </div>
                 <div className="navbar-end">
                     <div className='mr-2 flex items-center gap-2'>
-                        <img className='w-14 rounded-full' src={user?.photoURL} alt="" />
+                        <img className='w-0 lg:w-14 rounded-full' src={user?.photoURL} alt="" />
                         <p>{user?.displayName}</p>
                     </div>
                     {

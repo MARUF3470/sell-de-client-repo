@@ -19,7 +19,7 @@ const Car = ({ car, setBookedCar }) => {
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <img src={image} className="lg:max-w-sm rounded-lg shadow-2xl" alt='' />
                 <div>
-                    <h1 className="text-5xl font-bold">{productName}</h1>
+                    <h1 className="text-2xl font-bold">{productName}</h1>
                     <p className="py-2 font-semibold">Location: {location}</p>
                     <p className="py-2 font-semibold">Resale Price: {resalePrice}</p>
                     <p className="py-2 font-semibold">Original: price{originalPrice}</p>

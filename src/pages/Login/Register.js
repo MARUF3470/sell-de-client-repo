@@ -7,6 +7,7 @@ import './register.css'
 
 const Register = () => {
     const { registration, updateUserProfile } = useContext(AuthContext)
+    const [passErr, setPassErr] = useState('')
     const navigate = useNavigate()
     const [registrationError, setRegistrationError] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm()
@@ -142,6 +143,7 @@ const Register = () => {
                             {
                                 errors.password && <p className='text-red-400'>{errors.password?.message}</p>
                             }
+                            <p className='text-warning'>{passErr}</p>
                             <label className="label">
                                 <p>Already have an account? <Link className='text-blue-600' to='/login'>Login</Link></p>
                             </label>
